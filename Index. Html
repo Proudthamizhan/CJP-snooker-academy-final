@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CJP Snooker Academy – Mahalakshmi Nagar, Chennai</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="CJP Snooker Academy for Beginners and Intermediate players in Mahalakshmi Nagar, Madambakkam, Chennai. Quiet, poetic tables. WhatsApp bookings only."
+  />
+
+  <style>
+    :root {
+      --bg-offwhite: #f7f3eb;
+      --ink-grey: #4a4a4a;
+      --deep-green: #123c33;
+      --deep-green-soft: #184a3f;
+      --ochre: #c9913b;
+      --stone-grey: rgba(170, 170, 170, 0.4);
+      --card-radius: 20px;
+      --shadow-soft: 0 18px 38px rgba(0, 0, 0, 0.25);
+      --transition-fast: 200ms ease-out;
+      --transition-slow: 500ms ease-out;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      height: 100%;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #fdf8ee, #f0ece5);
+      color: var(--ink-grey);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .page {
+      min-height: 100vh;
+      color: var(--ink-grey);
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* HERO */
+
+    .hero {
+      position: relative;
+      height: 100vh;
+      width: 100%;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.2), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(0, 0, 0, 0.5), transparent 55%),
+        url("https://images.pexels.com/photos/15473887/pexels-photo-15473887.jpeg?cs=srgb&dl=pexels-valeriya-kobzar-42371713-15473887.jpg&fm=jpg")
+          center center / cover no-repeat fixed;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      color: #fdfcf9;
+    }
+
+    .hero::before {
+      /* dark vignette */
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top center, rgba(255, 255, 255, 0.06), transparent 60%),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.85));
+      mix-blend-mode: multiply;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .hero-smoke {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.3), transparent 60%),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.15), transparent 60%);
+      filter: blur(24px);
+      opacity: 1;
+      transition: opacity 300ms ease-out;
+      pointer-events: none;
+      z-index: 2;
+      mix-blend-mode: screen;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 3;
+      padding: 18vh 20px 26px;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: linear-gradient(
+        120deg,
+        rgba(0, 0, 0, 0.45),
+        rgba(255, 255, 255, 0.05)
+      );
+      backdrop-filter: blur(14px);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .hero-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #ffe8b3, #f39f42);
+      box-shadow: 0 0 8px rgba(255, 198, 112, 0.9);
+    }
+
+    .hero-heading {
+      font-size: 2rem;
+      line-height: 1.15;
+      letter-spacing: 0.02em;
+      margin-bottom: 10px;
+      text-shadow: 0 12px 40px rgba(0, 0, 0, 0.8);
+    }
+
+    .hero-heading span {
+      display: block;
+    }
+
+    .hero-sub {
+      font-size: 0.95rem;
+      line-height: 1.4;
+      max-width: 28rem;
+      opacity: 0.92;
+      margin-bottom: 18px;
+    }
+
+    .hero-sub strong {
+      font-weight: 600;
+    }
+
+    .hero-meta {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      opacity: 0.95;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 14px;
+      margin-bottom: 20px;
+    }
+
+    .hero-meta span {
+      position: relative;
+      padding-left: 14px;
+    }
+
+    .hero-meta span::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0.6;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .hero-cta {
+      flex: 1;
+      border-radius: 999px;
+      padding: 11px 18px;
+      border: 1px solid rgba(255, 240, 213, 0.6);
+      background: linear-gradient(135deg, #f7e0b2, #f1c575);
+      color: #2c1a07;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      text-align: center;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
+      transform: translateY(0);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast),
+        background 220ms ease-out;
+    }
+
+    .hero-cta:active {
+      transform: translateY(2px);
+      box-shadow: 0 7px 18px rgba(0, 0, 0, 0.5);
+      background: linear-gradient(135deg, #f2cb80, #e5a947);
+    }
+
+    .hero-secondary {
+      font-size: 0.8rem;
+      opacity: 0.85;
+      max-width: 9rem;
+      line-height: 1.3;
+    }
+
+    /* FLOATING NAV STONE */
+
+    .nav-stone {
+      position: fixed;
+      z-index: 40;
+      right: 14px;
+      bottom: 18px;
+      width: 52px;
+      height: 52px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 25% 20%, rgba(255, 255, 255, 0.75), transparent 65%),
+        radial-gradient(circle at 75% 80%, rgba(0, 0, 0, 0.4), transparent 70%),
+        rgba(210, 210, 210, 0.3);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      touch-action: manipulation;
+      transition: transform 180ms ease-out, box-shadow 180ms ease-out;
+    }
+
+    .nav-stone:active {
+      transform: translateY(2px) scale(0.97);
+      box-shadow: 0 7px 18px rgba(0, 0, 0, 0.5);
+    }
+
+    .nav-stone-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      background: radial-gradient(circle at 30% 20%, #f5f0e6, #b6b2aa);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-stone-icon::before,
+    .nav-stone-icon::after {
+      content: "";
+      position: absolute;
+      inset: 55% 15% 20%;
+      border-radius: 999px;
+      border-top: 1px solid rgba(255, 255, 255, 0.8);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    }
+
+    .nav-stone-icon::before {
+      transform: translateY(-6px);
+    }
+
+    .nav-stone-icon::after {
+      transform: translateY(3px);
+    }
+
+    .nav-stone-hint {
+      position: absolute;
+      right: 72px;
+      bottom: 30px;
+      background: rgba(18, 60, 51, 0.9);
+      color: #f9f4ea;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      opacity: 0.95;
+      pointer-events: none;
+      transform: translateX(0);
+      animation: hintFade 3s ease-out 0.8s forwards;
+    }
+
+    @keyframes hintFade {
+      0% {
+        opacity: 0;
+        transform: translateX(8px);
+      }
+      10%,
+      60% {
+        opacity: 0.95;
+        transform: translateX(0);
+      }
+      100% {
+        opacity: 0;
+        transform: translateX(10px);
+      }
+    }
+
+    /* NAV DRAWER */
+
+    .nav-drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(0, 0, 0, 0.7), transparent);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition-slow);
+      z-index: 39;
+    }
+
+    .nav-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 76%;
+      max-width: 320px;
+      background: linear-gradient(160deg, #151a16, #111413);
+      box-shadow: -18px 0 40px rgba(0, 0, 0, 0.7);
+      transform: translateX(100%);
+      transition: transform var(--transition-slow);
+      z-index: 41;
+      padding: 26px 20px 20px;
+      color: #f9f6ee;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .nav-open .nav-drawer {
+      transform: translateX(0);
+    }
+
+    .nav-open .nav-drawer-backdrop {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .nav-head {
+      font-size: 0.8rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      opacity: 0.8;
+    }
+
+    .nav-brand {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    .nav-links {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 0.95rem;
+    }
+
+    .nav-link {
+      padding: 9px 0;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-link span {
+      opacity: 0.9;
+    }
+
+    .nav-link small {
+      font-size: 0.7rem;
+      opacity: 0.6;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .nav-footer {
+      margin-top: auto;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 0.8rem;
+      opacity: 0.7;
+      line-height: 1.4;
+    }
+
+    .nav-footer strong {
+      font-weight: 600;
+    }
+
+    /* MAIN CONTENT SHELL */
+
+    .shell {
+      background:
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.4), transparent 10%),
+        radial-gradient(circle at top right, rgba(200, 145, 59, 0.08), transparent 60%),
+        var(--bg-offwhite);
+      border-radius: 26px 26px 0 0;
+      margin-top: -30px;
+      position: relative;
+      z-index: 5;
+      padding-bottom: 80px;
+      box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.45);
+    }
+
+    .shell-inner {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 22px 20px 0;
+    }
+
+    .section-label {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: rgba(72, 72, 72, 0.85);
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-size: 1.2rem;
+      margin-bottom: 14px;
+      color: #22201b;
+    }
+
+    .section-subtle {
+      font-size: 0.85rem;
+      line-height: 1.5;
+      opacity: 0.85;
+    }
+
+    /* GAMES – FLOATING CARDS */
+
+    .games-row {
+      margin-top: 18px;
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .game-card {
+      min-width: 230px;
+      max-width: 260px;
+      background: radial-gradient(circle at top left, #ffffff, #f2eee6);
+      border-radius: var(--card-radius);
+      box-shadow: var(--shadow-soft);
+      padding: 16px 16px 14px;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .game-tag {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: rgba(0, 0, 0, 0.55);
+    }
+
+    .game-title {
+      font-size: 1.05rem;
+      color: var(--deep-green-soft);
+      margin-top: 4px;
+    }
+
+    .game-haiku {
+      font-size: 0.85rem;
+      line-height: 1.5;
+      opacity: 0.9;
+      margin-top: 6px;
+      position: relative;
+    }
+
+    .game-haiku::before {
+      content: "“";
+      position: absolute;
+      left: -6px;
+      top: -6px;
+      font-size: 1.4rem;
+      opacity: 0.2;
+    }
+
+    .game-foot {
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .game-chip {
+      font-size: 0.7rem;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: rgba(24, 74, 63, 0.06);
+      color: rgba(24, 74, 63, 0.9);
+    }
+
+    .btn-outline-fill {
+      margin-left: auto;
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(24, 74, 63, 0.6);
+      font-size: 0.8rem;
+      text-decoration: none;
+      color: var(--deep-green-soft);
+      background: transparent;
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      transition: color 180ms ease-out, border-color 180ms ease-out,
+        transform 120ms ease-out;
+    }
+
+    .btn-outline-fill span {
+      position: relative;
+      z-index: 2;
+    }
+
+    .btn-outline-fill::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #184a3f, #0b2520);
+      transform: translateX(-120%);
+      transition: transform 220ms ease-out;
+      z-index: 1;
+    }
+
+    .btn-outline-fill.btn-filled,
+    .btn-outline-fill:active {
+      color: #f7f3eb;
+      border-color: transparent;
+      transform: translateY(1px);
+    }
+
+    .btn-outline-fill.btn-filled::before,
+    .btn-outline-fill:active::before {
+      transform: translateX(0);
+    }
+
+    /* BRAND STORY PANELS */
+
+    .story-stack {
+      margin-top: 34px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .story-panel {
+      position: relative;
+      border-radius: 22px;
+      overflow: hidden;
+      background: #111;
+      color: #f5eee2;
+      min-height: 160px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+    }
+
+    .story-media {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      filter: grayscale(0.2) contrast(1.1);
+      transform: scale(1.03);
+    }
+
+    .story-panel--bowls .story-media {
+      background-image: url("https://images.pexels.com/photos/9736669/pexels-photo-9736669.jpeg?cs=srgb&dl=pexels-koolshooters-9736669.jpg&fm=jpg");
+    }
+
+    .story-panel--ginkgo .story-media {
+      background-image: url("https://images.pexels.com/photos/14151876/pexels-photo-14151876.jpeg?cs=srgb&dl=pexels-suki-lee-110686949-14151876.jpg&fm=jpg");
+    }
+
+    .story-panel--tea .story-media {
+      background-image: url("https://images.pexels.com/photos/31240275/pexels-photo-31240275.jpeg?cs=srgb&dl=pexels-mavimiro-31240275.jpg&fm=jpg");
+      background-position: 35% 60%;
+    }
+
+    .story-fade-edge {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(0, 0, 0, 0.4), transparent 55%),
+        linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.85),
+          rgba(0, 0, 0, 0.7) 50%,
+          rgba(0, 0, 0, 0.9)
+        );
+      mask-image: radial-gradient(circle at top left, transparent 0, black 35%),
+        radial-gradient(circle at bottom right, transparent 0, black 55%);
+      mask-composite: intersect;
+      -webkit-mask-image: radial-gradient(circle at top left, transparent 0, black 35%),
+        radial-gradient(circle at bottom right, transparent 0, black 55%);
+      -webkit-mask-composite: source-in;
+    }
+
+    .story-inner {
+      position: relative;
+      z-index: 2;
+      padding: 18px 16px 16px;
+    }
+
+    .story-tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0.7;
+      margin-bottom: 6px;
+    }
+
+    .story-title {
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+
+    .story-text {
+      font-size: 0.85rem;
+      line-height: 1.5;
+      opacity: 0.9;
+      max-width: 90%;
+    }
+
+    /* LIFESTYLE MOODBOARD */
+
+    .moodboard {
+      margin-top: 34px;
+      border-radius: 26px;
+      padding: 18px 16px 16px;
+      background: radial-gradient(
+          circle at top left,
+          rgba(201, 145, 59, 0.06),
+          transparent 55%
+        ),
+        radial-gradient(circle at bottom right, rgba(10, 40, 30, 0.2), #151816);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+      color: #f9f4ea;
+    }
+
+    .mood-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .mood-title {
+      font-size: 0.9rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .mood-tagline {
+      font-size: 0.8rem;
+      opacity: 0.7;
+    }
+
+    .mood-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 70px;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .mood-tile {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      background: radial-gradient(circle at top, #2a312c, #121513);
+    }
+
+    .mood-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.06);
+      filter: saturate(0.9) contrast(1.05);
+    }
+
+    .mood-tile:nth-child(1) {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+
+    .mood-tile:nth-child(2) {
+      grid-column: span 2;
+      grid-row: span 1;
+    }
+
+    .mood-tile:nth-child(3) {
+      grid-column: span 2;
+      grid-row: span 1;
+    }
+
+    .mood-tile:nth-child(4) {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+
+    .mood-caption {
+      font-size: 0.78rem;
+      margin-top: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0.85;
+    }
+
+    /* FOOTER / INFO */
+
+    .info-section {
+      margin-top: 32px;
+      font-size: 0.83rem;
+      line-height: 1.6;
+      opacity: 0.9;
+    }
+
+    .info-section p + p {
+      margin-top: 8px;
+    }
+
+    .info-highlight {
+      color: var(--deep-green-soft);
+      font-weight: 600;
+    }
+
+    .info-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 4px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px dashed rgba(24, 74, 63, 0.5);
+      background: rgba(247, 243, 235, 0.7);
+    }
+
+    .info-whatsapp a {
+      text-decoration: none;
+      color: var(--deep-green-soft);
+      font-weight: 600;
+    }
+
+    .info-whatsapp small {
+      font-size: 0.75rem;
+      opacity: 0.8;
+    }
+
+    .footer-note {
+      margin-top: 20px;
+      font-size: 0.7rem;
+      opacity: 0.7;
+      text-align: left;
+    }
+
+    /* FADE-IN ON SCROLL */
+
+    .fade-section {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 600ms ease-out, transform 600ms ease-out;
+    }
+
+    .fade-section.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVE TWEAKS */
+
+    @media (min-width: 720px) {
+      .hero-inner {
+        padding-top: 22vh;
+      }
+      .hero-heading {
+        font-size: 2.4rem;
+      }
+      .games-row {
+        justify-content: flex-start;
+      }
+      .shell-inner {
+        padding-inline: 26px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page" id="top">
+    <!-- NAV STONE + DRAWER -->
+    <button class="nav-stone" id="navStone" aria-label="Open navigation">
+      <div class="nav-stone-icon"></div>
+      <div class="nav-stone-hint">Swipe / tap for menu</div>
+    </button>
+
+    <div class="nav-drawer-backdrop" id="navBackdrop"></div>
+
+    <aside class="nav-drawer" id="navDrawer">
+      <div>
+        <div class="nav-head">CJP Snooker Academy</div>
+        <div class="nav-brand">Madambakkam · Chennai</div>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#games" class="nav-link">
+          <span>Games</span>
+          <small>Snooker · Billiards · 8-ball</small>
+        </a>
+        <a href="#story" class="nav-link">
+          <span>Story</span>
+          <small>Tea · Smoke · Silence</small>
+        </a>
+        <a href="#moodboard" class="nav-link">
+          <span>Snooker Parlour</span>
+          <small>Lifestyle moodboard</small>
+        </a>
+        <a href="#info" class="nav-link">
+          <span>Location & WhatsApp</span>
+          <small>Bookings only</small>
+        </a>
+      </nav>
+
+      <div class="nav-footer">
+        <p>
+          <strong>Quiet, poetic tables</strong><br />
+          For beginners and intermediate players who prefer incense and soft
+          lights to loud crowds.
+        </p>
+      </div>
+    </aside>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-smoke" id="heroSmoke"></div>
+
+      <div class="hero-inner">
+        <div class="hero-badge">
+          <span class="hero-dot"></span>
+          <span>Before the first break, there is breath.</span>
+        </div>
+
+        <h1 class="hero-heading">
+          <span>CJP Snooker Academy</span>
+          <span>for Beginners and Intermediate</span>
+        </h1>
+
+        <p class="hero-sub">
+          Dawn light, green cloth, low voices. A small snooker academy in
+          <strong>Mahalakshmi Nagar, Madambakkam</strong>, quietly tucked inside
+          Chennai’s morning.
+        </p>
+
+        <div class="hero-meta">
+          <span>Guided practice for new players</span>
+          <span>Slow frames · Focused sessions</span>
+          <span>Bookings only on WhatsApp</span>
+        </div>
+
+        <div class="hero-cta-row">
+          <a
+            class="hero-cta"
+            href="https://wa.me/917305835263?text=Hi%20CJP%20Snooker%20Academy%2C%20I%27d%20like%20to%20book%20a%20session."
+            target="_blank"
+            rel="noopener"
+          >
+            Book a quiet table on WhatsApp
+          </a>
+          <div class="hero-secondary">
+            One table, incense smoke, and the sound of a single break.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <main class="shell" id="games">
+      <div class="shell-inner">
+        <!-- GAMES -->
+        <section class="fade-section">
+          <div class="section-label">Games we hold</div>
+          <h2 class="section-title">Three ways to listen to the cue ball</h2>
+          <p class="section-subtle">
+            Choose your frame. Each game is held in a focused, low-noise
+            environment, with gentle guidance for beginners and intermediates.
+          </p>
+
+          <div class="games-row">
+            <!-- Snooker -->
+            <article class="game-card">
+              <div>
+                <div class="game-tag">Snooker</div>
+                <div class="game-title">Long tables, soft mornings</div>
+                <p class="game-haiku">
+                  Reds like small lanterns, / colours waiting in the wings. /
+                  You breathe between shots.
+                </p>
+              </div>
+              <div class="game-foot">
+                <span class="game-chip">Perfect for patient learners</span>
+                <a
+                  href="https://wa.me/917305835263?text=Hi%20CJP%20Snooker%20Academy%2C%20I%27d%20like%20to%20book%20a%20Snooker%20session."
+                  target="_blank"
+                  rel="noopener"
+                  class="btn-outline-fill book-btn"
+                  data-game="Snooker"
+                >
+                  <span>Book Now</span>
+                </a>
+              </div>
+            </article>
+
+            <!-- Billiards -->
+            <article class="game-card">
+              <div>
+                <div class="game-tag">Billiards</div>
+                <div class="game-title">Lines, leaves, geometry</div>
+                <p class="game-haiku">
+                  Three balls drift slowly, / chalk dust hangs in quiet air. /
+                  Angles learn your name.
+                </p>
+              </div>
+              <div class="game-foot">
+                <span class="game-chip">Rhythm & control drills</span>
+                <a
+                  href="https://wa.me/917305835263?text=Hi%20CJP%20Snooker%20Academy%2C%20I%27d%20like%20to%20book%20a%20Billiards%20session."
+                  target="_blank"
+                  rel="noopener"
+                  class="btn-outline-fill book-btn"
+                  data-game="Billiards"
+                >
+                  <span>Book Now</span>
+                </a>
+              </div>
+            </article>
+
+            <!-- 8-Ball -->
+            <article class="game-card">
+              <div>
+                <div class="game-tag">8-Ball</div>
+                <div class="game-title">Friends, frames, small rituals</div>
+                <p class="game-haiku">
+                  Solids, stripes, and laughs, / one black sun at the very
+                  end. / You call, then you clear.
+                </p>
+              </div>
+              <div class="game-foot">
+                <span class="game-chip">Casual sets · Doubles</span>
+                <a
+                  href="https://wa.me/917305835263?text=Hi%20CJP%20Snooker%20Academy%2C%20I%27d%20like%20to%20book%20an%208%E2%80%91Ball%20session."
+                  target="_blank"
+                  rel="noopener"
+                  class="btn-outline-fill book-btn"
+                  data-game="8-Ball"
+                >
+                  <span>Book Now</span>
+                </a>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- BRAND STORY -->
+        <section id="story" class="fade-section">
+          <div class="section-label">Brand story</div>
+          <h2 class="section-title">
+            Cracked bowls, tea rituals, and a green table
+          </h2>
+
+          <div class="story-stack">
+            <!-- Cracked bowls -->
+            <article class="story-panel story-panel--bowls">
+              <div class="story-media"></div>
+              <div class="story-fade-edge"></div>
+              <div class="story-inner">
+                <div class="story-tag">Kintsugi thinking</div>
+                <div class="story-title">Every miss is just a crack of gold</div>
+                <p class="story-text">
+                  We like imperfect frames. A mis-cue, a missed black, a laugh.
+                  Like bowls mended with gold, your game grows stronger where it
+                  once broke.
+                </p>
+              </div>
+            </article>
+
+            <!-- Ginkgo leaves -->
+            <article class="story-panel story-panel--ginkgo">
+              <div class="story-media"></div>
+              <div class="story-fade-edge"></div>
+              <div class="story-inner">
+                <div class="story-tag">Ginkgo leaves</div>
+                <div class="story-title">Fallen, but still part of the garden</div>
+                <p class="story-text">
+                  Outside, leaves fall and settle. Inside, balls scatter and
+                  rest. We teach you to see each position—not as a problem, but
+                  as the next line in a poem.
+                </p>
+              </div>
+            </article>
+
+            <!-- Tea ritual -->
+            <article class="story-panel story-panel--tea">
+              <div class="story-media"></div>
+              <div class="story-fade-edge"></div>
+              <div class="story-inner">
+                <div class="story-tag">Tea table</div>
+                <div class="story-title">Small rituals before the break</div>
+                <p class="story-text">
+                  Chalk the tip. Wipe the rail. Breathe once. Our sessions feel
+                  like a tea ritual with a cue stick—slow, attentive, ready for
+                  that first gentle strike.
+                </p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- MOODBOARD -->
+        <section id="moodboard" class="fade-section">
+          <div class="section-label">Snooker parlour</div>
+
+          <div class="moodboard">
+            <div class="mood-title-row">
+              <h2 class="mood-title">Lifestyle moodboard</h2>
+              <p class="mood-tagline">
+                Minimal tatami corners · pottery fissures catching light
+              </p>
+            </div>
+
+            <div class="mood-grid">
+              <div class="mood-tile">
+                <img
+                  src="https://images.pexels.com/photos/31240275/pexels-photo-31240275.jpeg?cs=srgb&dl=pexels-mavimiro-31240275.jpg&fm=jpg"
+                  alt="Tatami room with soft natural light"
+                  loading="lazy"
+                />
+              </div>
+              <div class="mood-tile">
+                <img
+                  src="https://images.pexels.com/photos/9736669/pexels-photo-9736669.jpeg?cs=srgb&dl=pexels-koolshooters-9736669.jpg&fm=jpg"
+                  alt="Handmade pottery bowls in a rustic studio"
+                  loading="lazy"
+                />
+              </div>
+              <div class="mood-tile">
+                <img
+                  src="https://images.pexels.com/photos/14151876/pexels-photo-14151876.jpeg?cs=srgb&dl=pexels-suki-lee-110686949-14151876.jpg&fm=jpg"
+                  alt="Golden ginkgo leaves in warm light"
+                  loading="lazy"
+                />
+              </div>
+              <div class="mood-tile">
+                <img
+                  src="https://images.pexels.com/photos/15473887/pexels-photo-15473887.jpeg?cs=srgb&dl=pexels-valeriya-kobzar-42371713-15473887.jpg&fm=jpg"
+                  alt="Moody snooker table under green lamps"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+
+            <div class="mood-caption">SNOOKER PARLOUR</div>
+          </div>
+        </section>
+
+        <!-- INFO / LOCATION -->
+        <section id="info" class="info-section fade-section">
+          <div class="section-label">Visit & bookings</div>
+          <h2 class="section-title">A small green room in Mahalakshmi Nagar</h2>
+
+          <p>
+            CJP Snooker Academy is located in
+            <span class="info-highlight"
+              >Mahalakshmi Nagar, Madambakkam, Chennai</span
+            >—a quiet pocket away from the main road, where you can hear your
+            own break.
+          </p>
+
+          <p>
+            We keep the space intentionally calm and uncluttered. Limited
+            sessions each day, so every player gets time on the table without
+            rush.
+          </p>
+
+          <p class="info-whatsapp">
+            <span>Bookings on WhatsApp only:</span>
+            <a
+              href="https://wa.me/917305835263"
+              target="_blank"
+              rel="noopener"
+            >
+              +91&nbsp;73058&nbsp;35263
+            </a>
+            <small>(tap to open chat)</small>
+          </p>
+
+          <p>
+            Send us a short message with your
+            <strong>name</strong>, <strong>preferred game</strong> (Snooker,
+            Billiards, or 8-Ball), and <strong>time slot</strong>. We’ll confirm
+            availability and guide you in.
+          </p>
+
+          <p class="footer-note">
+            The whole site is designed to feel like stepping into a perfume
+            atelier hidden inside a Zen garden—quiet, poetic, and almost ready
+            to disappear when you close your browser.
+          </p>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Fade incense smoke as you scroll
+    (function () {
+      const smoke = document.getElementById("heroSmoke");
+      if (!smoke) return;
+
+      function updateSmoke() {
+        const y = window.scrollY || window.pageYOffset || 0;
+        const opacity = Math.max(0, 1 - y / 340);
+        smoke.style.opacity = opacity.toFixed(2);
+      }
+
+      updateSmoke();
+      window.addEventListener("scroll", updateSmoke, { passive: true });
+    })();
+
+    // Nav drawer open/close
+    (function () {
+      const root = document.documentElement;
+      const stone = document.getElementById("navStone");
+      const drawer = document.getElementById("navDrawer");
+      const backdrop = document.getElementById("navBackdrop");
+
+      function openNav() {
+        root.classList.add("nav-open");
+      }
+      function closeNav() {
+        root.classList.remove("nav-open");
+      }
+
+      stone.addEventListener("click", openNav);
+      backdrop.addEventListener("click", closeNav);
+
+      drawer.querySelectorAll("a.nav-link").forEach((link) => {
+        link.addEventListener("click", closeNav);
+      });
+
+      // Swipe gestures (open from right edge, close when swiping right)
+      let touchX = null;
+      let touchFromEdge = false;
+
+      window.addEventListener(
+        "touchstart",
+        (e) => {
+          if (!e.touches || !e.touches.length) return;
+          const x = e.touches[0].clientX;
+          touchX = x;
+          const width = window.innerWidth || 0;
+          // start near right edge to open
+          touchFromEdge = x > width * 0.82;
+        },
+        { passive: true }
+      );
+
+      window.addEventListener(
+        "touchend",
+        (e) => {
+          if (touchX == null) return;
+          const x = (e.changedTouches && e.changedTouches[0].clientX) || touchX;
+          const dx = x - touchX;
+
+          if (!root.classList.contains("nav-open") && touchFromEdge && dx < -40) {
+            openNav();
+          } else if (root.classList.contains("nav-open") && dx > 40) {
+            closeNav();
+          }
+
+          touchX = null;
+          touchFromEdge = false;
+        },
+        { passive: true }
+      );
+    })();
+
+    // Book buttons: animate fill on tap and keep WhatsApp link
+    (function () {
+      document.querySelectorAll(".book-btn").forEach((btn) => {
+        btn.addEventListener("touchstart", () => {
+          btn.classList.add("btn-filled");
+        });
+        btn.addEventListener("touchend", () => {
+          setTimeout(() => btn.classList.remove("btn-filled"), 230);
+        });
+        btn.addEventListener("mousedown", () => {
+          btn.classList.add("btn-filled");
+        });
+        btn.addEventListener("mouseup", () => {
+          setTimeout(() => btn.classList.remove("btn-filled"), 230);
+        });
+        btn.addEventListener("mouseleave", () => {
+          btn.classList.remove("btn-filled");
+        });
+      });
+    })();
+
+    // Fade-in sections on scroll
+    (function () {
+      const sections = document.querySelectorAll(".fade-section");
+      if (!("IntersectionObserver" in window)) {
+        sections.forEach((s) => s.classList.add("in-view"));
+        return;
+      }
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("in-view");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.18 }
+      );
+
+      sections.forEach((s) => observer.observe(s));
+    })();
+  </script>
+</body>
+</html>
